@@ -116,20 +116,6 @@ class SLinkedList:
 # print('after: ',sLinkedList)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Circular Linked List.
 class CSLinkedList:
   def __init__(self) -> None:
@@ -254,15 +240,6 @@ class CSLinkedList:
 # print('before: ', cSLinkedList.tail.next.value, cSLinkedList.tail.value)
 # print('after:', cSLinkedList)
 # cSLinkedList.traverseCSLL()
-
-
-
-
-
-
-
-
-
 
 
 # Doubly Linked List 
@@ -405,10 +382,6 @@ class DoublyLL:
 
 
 
-
-
-
-
 # Circular Doubly Linked List
 class CDoublyLL:
   def __init__(self) -> None:
@@ -514,10 +487,10 @@ class CDoublyLL:
       self.head = self.head.next
       return deletedNode
     # if last and has more than one node.
-    elif location == -1:
+    elif location == -1: 
       deletedNode = self.tail
       self.tail.prev.next = self.head
-      self.head = self.tail.prev
+      self.head.prev = self.tail.prev
       self.tail = self.tail.prev
       return deletedNode
     else:
@@ -527,7 +500,7 @@ class CDoublyLL:
           # if it's last node.
           if self.tail == node:
             self.tail.prev.next = self.head
-            self.head = self.tail.prev
+            self.head.prev = self.tail.prev
             self.tail = self.tail.prev
             return deletedNode
           else:
@@ -540,20 +513,110 @@ class CDoublyLL:
     # coz they are pointing at each other.
     for node in self:
       node.prev = None
+    self.head.next = None
+    self.tail.prev = None
     self.head = None
     self.tail = None
 
-cDLL = CDoublyLL()
-cDLL.createDLL(1)
-cDLL.insertDNode(2,0) 
-cDLL.insertDNode(4,1)
-newNode = cDLL.insertDNode(3,1 )
-newNode = cDLL.insertDNode(33,2 )
+# cDLL = CDoublyLL()
+# cDLL.createDLL(1)
+# cDLL.insertDNode(2,0) 
+# cDLL.insertDNode(4,1)
+# newNode = cDLL.insertDNode(3,1 )
+# newNode = cDLL.insertDNode(33,2 )
 
-print('before: ', len(cDLL))
+# print('before: ', cDLL)
 
-# deleted = cDLL.removeDNode(3)
-print('after: ', cDLL.reverseIter())
-# print(newNode)
+# deleted = cDLL.clear()
+# print('after: ', cDLL)
+# print(cDLL.head.prev.value)
+
+from random import randint
+import time
+
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+        self.prev = None
+
+    def __str__(self):
+        return str(self.value)
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.len = 0
+
+    def __iter__(self):
+        current_node = self.head
+        while current_node:
+            yield  current_node
+            current_node = current_node.next
+
+    def __len__(self):
+        return self.len
+
+    def __str__(self):
+        return str([node.value for node in self])
+
+    def add(self, value):
+        new_node = Node(value)
+        if not self.head:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.next = new_node
+            new_node.prev = self.tail
+            self.tail = new_node
+        self.len += 1
+
+    @staticmethod
+    def generate(n, min_value, max_value):
+        ll = LinkedList()
+        for _ in range(n):
+            ll.add(randint(min_value, max_value))
+        return ll
 
 
+# remove duplicates.
+def solution(ll):
+  for _, node in enumerate(ll):
+    c_node = node.next
+    prevNode = node
+    while c_node:
+      if node.value == c_node.value:
+        if c_node == ll.tail:
+          prevNode.next = None
+          ll.tail = prevNode
+        else:
+          prevNode.next  = c_node.next
+        c_node = c_node.next
+      else:
+        prevNode = c_node
+        c_node = c_node.next
+  return ll
+
+
+def test(n, min, max, skargs = None):
+    ll = LinkedList.generate(n, min, max)
+    if skargs:
+        t = {}
+        for k in skargs:
+            t[k] = str(skargs[k])
+        print("Input Linked List: ", ll, ', ', t, '\n')
+        start_time = time.time()
+        ll = solution(ll, **skargs)
+    else:
+        print("Input Linked List: ", ll, '\n')
+        start_time = time.time()
+        ll = solution(ll)
+    end_time = time.time() - start_time
+    print("Output: ", ll, '\n')
+    print("Execution Time in milliseconds: ", round(end_time * 1000, 3), '\n')
+    print(''.join(['#' for _ in range(0, 30)]), '\n\n')
+
+test(10, 0, 5)
+test(10, 0, 0)
+test(0, 0, 0)
