@@ -579,9 +579,7 @@ class LinkedList:
             ll.add(randint(min_value, max_value))
         return ll
 
-
-# remove duplicates.
-def solution(ll):
+def removeDuplicates(ll):
   for _, node in enumerate(ll):
     c_node = node.next
     prevNode = node
@@ -596,6 +594,18 @@ def solution(ll):
       else:
         prevNode = c_node
         c_node = c_node.next
+  return ll
+
+  
+
+def removeMiddleNode(ll):
+  prevNode = ll.head
+  print((len(ll)//2)+1, len(ll))
+  for index, node in enumerate(ll):
+    if index == len(ll)//2:
+      print('deleted node: ', node.value, 'index: ', index)
+      prevNode.next = node.next
+    prevNode = node
   return ll
 
 
@@ -617,6 +627,30 @@ def test(n, min, max, skargs = None):
     print("Execution Time in milliseconds: ", round(end_time * 1000, 3), '\n')
     print(''.join(['#' for _ in range(0, 30)]), '\n\n')
 
-test(10, 0, 5)
-test(10, 0, 0)
-test(0, 0, 0)
+test(11, 0, 5)
+# test(10, 0, 0)
+# test(0, 0, 0)
+
+# [1,4,3,2,5,2,1,2,1]
+# [1,4,3,0,2,5,2]
+# 3
+# if value before x is less than it stays at the same place.
+        # for Inode in checkList:
+        #     node = head
+        #     prevNode = head
+        #     while node:
+        #         if Inode.val < x and Inode.val < node.val:
+        #             # if start at head.
+        #             if node == head:
+        #                 temp = head
+        #                 head = Inode
+        #                 head.next = temp
+        #             # if last
+        #             elif not node.next:
+        #                 prevNode.next = Inode
+        #             else:
+        #                 Inode.next = prevNode.next
+        #                 prevNode.next = Inode
+        #             break
+        #         prevNode = node
+        #         node = node.next
