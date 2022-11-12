@@ -181,28 +181,3 @@ print(queue.isEmpty())
 # queue.enQueue(6)
 # # print('peek: ', queue.peek())
 # print(queue)
-    # def __init__(self):
-    #     self.stack = []
-    #     self.mins = []
-    #     self.offset = -1
-        
-        
-    # def push(self, val: int) -> None:
-    #     self.stack.append(val)
-    #     if self.mins == []: self.mins.append(val)
-    #     elif self.mins[-1] >= val: self.mins.append(val)
-    #     self.offset += 1
-                    
-    # def pop(self) -> None:
-    #     if self.mins[-1] == self.stack[self.offset]:
-    #         self.mins.pop()
-    #     self.stack.pop()
-    #     self.offset -= 1
-        
-
-    # def top(self) -> int:
-    #     return self.stack[self.offset]
-        
-
-    # def getMin(self) -> int:
-    #     return self.mins[-1]
