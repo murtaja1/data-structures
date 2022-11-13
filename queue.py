@@ -167,12 +167,12 @@ class MultiStack:
 
 
 
-queue = MultiStack(4)
+# queue = MultiStack(4)
 # queue.enQueue(1)
 # queue.enQueue(2)
 # queue.enQueue(3)
 # queue.enQueue(4)
-print(queue.isEmpty())
+# print(queue.isEmpty())
 # print('dequeue: ', queue.deQueue())
 # print('dequeue: ', queue.deQueue())
 # print('dequeue: ', queue.deQueue())
