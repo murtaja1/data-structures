@@ -142,3 +142,84 @@ def insertNewNode(rootNode, nodeValue):
                 return 
 
 # insertNewNode(tree, 'iam new node')
+
+# delete tree node.
+
+# find and remove the deepest node.
+def findDeepestNode(rootNode):
+    if not rootNode:
+        return 'the tree does not exits!'
+
+    else: 
+        queue = LLQueue()
+        queue.enQueue(rootNode)
+        while not queue.isEmpty():
+            current = queue.deQueue()
+
+            if current.left:
+                queue.enQueue(current.left)
+
+            if current.right:
+                queue.enQueue(current.right)
+        return current.data
+
+def removeDeepestNode(rootNode, dNode):
+    if not rootNode:
+        return 'the tree does not exits!'
+
+    else: 
+        queue = LLQueue()
+        queue.enQueue(rootNode)
+        while not queue.isEmpty():
+            current = queue.deQueue()
+
+            if current.left:
+                if current.left.data == dNode:
+                    current.left.data = None
+                    current.left = None
+                    return 'removed'
+                else:
+                    queue.enQueue(current.left)
+
+            if current.right:
+                if current.right.data == dNode:
+                    current.right.data = None
+                    current.right = None
+                    return 'removed'
+                else:
+                    queue.enQueue(current.right)
+        return 'was not removed'
+
+def deleteNode(rootNode, nodeValue):
+    if not rootNode:
+        return 'There is no tree!'
+    else:
+        queue = LLQueue()
+        queue.enQueue(rootNode)
+        while not queue.isEmpty():
+            current = queue.deQueue()
+            if current.data == nodeValue:
+                deepestNode = findDeepestNode(tree)
+                removeDeepestNode(tree, deepestNode)
+                current.data = deepestNode
+                return 'Node was deleted!'
+
+            if current.left:
+                queue.enQueue(current.left)
+
+            if current.right:
+                queue.enQueue(current.right)
+
+        return 'Tree Node was not found!'
+# deleteNode(tree, 'Drinks')
+
+# delete entire node.
+def deleteBT(rootNode):
+    if not rootNode:
+        return 'There is no tree!'
+    else:
+        rootNode.left = None
+        rootNode.right = None
+        rootNode.data= None
+
+# deleteBT(tree)
