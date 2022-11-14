@@ -1,37 +1,3 @@
-# class TreeNode:
-#   def __init__(self, data, children = []) -> None:
-#     self.data = data
-#     self.children = children
-
-#   def __str__(self, level=0):
-#       ret = "  " * level + str(self.data)  + "\n"
-#       for child in self.children:
-#           ret += child.__str__(level + 1)
-#       return ret
-  
-#   def addChild(self, treeNode):
-#     self.children.append(treeNode)
-
-# tree = TreeNode('Drinks', [])
-# cold = TreeNode('Juice', [])
-# hot = TreeNode('Hot', [])
-
-# orange = TreeNode('orange', [])
-# lemon = TreeNode('lemon', [])
-          
-# coffee = TreeNode('coffee', [])
-# tea = TreeNode('Tea', [])
-
-# tree.addChild(cold)
-# tree.addChild(hot)
-
-# cold.addChild(orange)
-# cold.addChild(lemon)
-
-# hot.addChild(coffee)
-# hot.addChild(tea)
-# print(tree)
-
 from queue import LLQueue
 
 class TreeNode:
@@ -48,16 +14,6 @@ class TreeNode:
             ret += self.right.__str__(level + 1)
         return ret
 
-tree = TreeNode('Drinks')
-
-tree.left = TreeNode('Juice')
-tree.right = TreeNode('Hot')
-
-tree.left.left = TreeNode('orange')
-tree.left.right = TreeNode('lemon')
-          
-tree.right.left = TreeNode('coffee')
-tree.right.right = TreeNode('Tea')
 
 # preOrder traversal:
 def preOrderTraversal(rootNode):
@@ -141,8 +97,15 @@ def insertNewNode(rootNode, nodeValue):
                 current.right = newNode
                 return 
 
-# insertNewNode(tree, 'iam new node')
+tree = TreeNode('Drinks')
 
+insertNewNode(tree, 'Juice')
+insertNewNode(tree, 'Hot')
+insertNewNode(tree, 'orange')
+insertNewNode(tree, 'lemon')
+insertNewNode(tree, 'coffee')
+insertNewNode(tree, 'Tea')
+levelOrderTraversal(tree)
 # delete tree node.
 
 # find and remove the deepest node.
