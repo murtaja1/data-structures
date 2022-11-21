@@ -24,6 +24,50 @@ class BinaryST:
                 root.right = BinaryST(value)
             else:
                 self.insertBTNode(root.right, value)
+
+    def _minValue(self, root):
+        current = root
+        while current.left:
+            current = current.left
+        return current
+    # time complexity is O(logN)
+    # space complexity is O(logN)
+    def deleteNode(self, root, value):
+        if not root:
+            return root
+        if value < root.data:
+            root.left = self.deleteNode(root.left, value)
+        elif value > root.data:
+            root.right = self.deleteNode(root.right, value)
+        else:
+            # if has one child or leaf
+            if not root.left:
+                temp = root.right # might has value or None.
+                root = None
+                return temp
+            if not root.right:
+                temp = root.left
+                root = None
+                return temp
+                   
+            # if has two children.
+            temp = self._minValue(root.right)
+            root.data = temp.data 
+            root.right = self.deleteNode(root.right, temp.data) # remove the min value that was taken in place of the deleted.
+        return root
+    # time complexity is O(logN)
+    # space complexity is O(logN)
+    def searchNode(self, root, value):
+        if not root or root.data == value:
+            return root
+        if value < root.data: self.searchNode(root.left, value)
+        else: self.searchNode(root.right, value)
+    # time complexity is O(1)
+    # space complexity is O(1)
+    def deleteBST(self):
+        self.data = None
+        self.right = None
+        self.left = None
     # time complexity is O(N) for pre, in and level order traversal.
     # space complexity is O(N) for pre, in and level order traversal.
     def preOrderTraversal(self, rootNode):
@@ -60,3 +104,16 @@ class BinaryST:
                     queue.enQueue(current.left)
                 if current.right:
                     queue.enQueue(current.right)
+
+
+root = BinaryST(None)
+root.insertBTNode(root, 10)
+root.insertBTNode(root, 20)
+root.insertBTNode(root, 5)
+root.insertBTNode(root, 33)
+root.insertBTNode(root, 22)
+root.insertBTNode(root, 55)
+root.insertBTNode(root, 11)
+root.insertBTNode(root, 99)
+root.deleteNode(root, 1111)
+root.levelOrderTraversal(root)
