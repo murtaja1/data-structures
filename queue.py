@@ -163,10 +163,6 @@ class MultiStack:
       if len(self.custList[i]) > 3: return False
     return True
 
-
-
-
-
 # queue = MultiStack(4)
 # queue.enQueue(1)
 # queue.enQueue(2)
