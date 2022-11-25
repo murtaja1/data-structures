@@ -68,8 +68,8 @@ class BinaryST:
         self.data = None
         self.right = None
         self.left = None
-    # time complexity is O(N) for pre, in and level order traversal.
-    # space complexity is O(N) for pre, in and level order traversal.
+    # time complexity is O(N) for pre, in, post and level order traversal.
+    # space complexity is O(N) for pre, in, post and level order traversal.
     def preOrderTraversal(self, rootNode):
         if not rootNode:
             return 
