@@ -1,7 +1,7 @@
 # Binary Search Tree
 # 1. in the left subtree the value of the node is less than or equal to its parent node's value.
 # 2. in the right subtree the value of the node is greater than its parent node's value.
-# check visualisation\bianrysearchtree.png
+# check visualization\bianrysearchtree.png
 #  
 from queue import LLQueue
 
@@ -57,7 +57,7 @@ class BinaryST:
         return root
     # time complexity is O(logN)
     # space complexity is O(logN)
-    def searchNode(self, root, value):
+    def searchNode(self, root, value): # can be done in an iterative way, check AVL Tree.
         if not root or root.data == value:
             return root
         if value < root.data: self.searchNode(root.left, value)
