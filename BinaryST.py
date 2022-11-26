@@ -51,9 +51,9 @@ class BinaryST:
                 return temp
                    
             # if has two children.
-            temp = self._minValue(root.right)
-            root.data = temp.data 
-            root.right = self.deleteNode(root.right, temp.data) # remove the min value that was taken in place of the deleted.
+            successor = self._minValue(root.right) # get the mini left (successor) in the right subtree
+            root.data = successor.data 
+            root.right = self.deleteNode(root.right, successor.data) # remove the min value that was taken in place of the deleted.
         return root
     # time complexity is O(logN)
     # space complexity is O(logN)
@@ -115,5 +115,5 @@ root.insertBTNode(root, 22)
 root.insertBTNode(root, 55)
 root.insertBTNode(root, 11)
 root.insertBTNode(root, 99)
-root.deleteNode(root, 1111)
+root.deleteNode(root, 11)
 root.levelOrderTraversal(root)

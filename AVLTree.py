@@ -2,7 +2,7 @@
 # can't be more than one node for all nodes. check image: visualization\AVLTree\AVL tree.png
 # why: to make the time complexity O(logN) instead of O(n) in BST.
 
-# the four conditions:
+# the four conditions for insertion and deletion:
     # 1- Left Left condition and rotation is required.
     # to know it's left, left: 
         # 1. find the unbalanced node.
@@ -43,7 +43,7 @@ class AVLTree:
     # space complexity is O(1)
     def searchNode(self, root, value):
         current = root
-        while not current:
+        while current:
             if value == current.data:
                 return current
             elif value < current.data:
@@ -89,6 +89,8 @@ class AVLTree:
                     queue.enQueue(current.right)
 
     # INSERTION:
+    # time complexity is O(logN)
+    # space complexity is O(logN)
     def insertNode(self, rootNode, value):
         # note: the insertion is done firstly then balancing the tree.
         if not rootNode:
@@ -97,7 +99,7 @@ class AVLTree:
             rootNode.left = self.insertNode(rootNode.left, value)
         else:
             rootNode.right = self.insertNode(rootNode.right, value)
-        
+
         rootNode.height = 1 + max(self.getHeight(rootNode.left), self.getHeight(rootNode.right))
         balance = self.getBalance(rootNode)
         # Left, Left condition.
@@ -115,6 +117,56 @@ class AVLTree:
             rootNode.right = self.rightRotation(rootNode.right) # to make it right, right condition firstly.
             return self.leftRotation(rootNode)
         return rootNode
+
+    # DELETION.
+    # time complexity is O(logN)
+    # space complexity is O(logN)
+    def deleteNode(self, rootNode, value):
+        if not rootNode:
+            return rootNode
+        elif value < rootNode.data:
+            rootNode.left = self.deleteNode(rootNode.left, value)
+        elif value > rootNode.data: 
+            rootNode.right = self.deleteNode(rootNode.right, value)
+        else: 
+            # if has one child or leaf
+            if not rootNode.left:
+                temp = rootNode.right # might has value or None.
+                rootNode = None
+                return temp
+            elif not rootNode.right:
+                temp = rootNode.left
+                rootNode = None
+                return temp
+
+            successor = self._minValue(rootNode.right) # get the mini left (successor) in the right subtree
+            rootNode.data = successor.data
+            rootNode.right = self.deleteNode(rootNode.right, successor.data)
+        rootNode.height = 1 + max(self.getHeight(rootNode.left), self.getHeight(rootNode.right))
+        balance = self.getBalance(rootNode)
+
+        # Left, Left condition
+        if balance > 1 and self.getBalance(rootNode.left) >= 0:
+            return self.rightRotation(rootNode)
+        # Left, Right condition
+        if balance > 1 and self.getBalance(rootNode.left) < 0:
+            rootNode.left = self.leftRotation(rootNode.left)
+            return self.rightRotation(rootNode)
+        # Right, Right condition
+        if balance < -1 and self.getBalance(rootNode.right) <= 0:
+            return self.leftRotation(rootNode)
+        # Right, Left condition
+        if balance < -1 and self.getBalance(rootNode.right) > 0:
+            rootNode.right = self.rightRotation(rootNode.right)
+            return self.leftRotation(rootNode)
+        return rootNode
+            
+
+    def _minValue(self, root):
+        current = root
+        while current.left:
+            current = current.left
+        return current
 
     def getHeight(self, rootNode):
         if not rootNode:
@@ -146,4 +198,8 @@ newAVL = AVLTree(5)
 newAVL = newAVL.insertNode(newAVL, 10)
 newAVL = newAVL.insertNode(newAVL, 15)
 newAVL = newAVL.insertNode(newAVL, 20)
+newAVL = newAVL.deleteNode(newAVL, 15)
+newAVL = newAVL.deleteNode(newAVL, 5)
+newAVL = newAVL.deleteNode(newAVL, 10)
+newAVL = newAVL.insertNode(newAVL, 30)
 newAVL.levelOrderTraversal()
