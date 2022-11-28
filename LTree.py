@@ -32,7 +32,8 @@
 # hot.addChild(tea)
 # print(tree)
 
-# to find left child use left = cell[2x]. the x is the index of the cell
+# NOTE: the x is the index of the parent cell.
+# to find left child use left = cell[2x]. 
 # to find right child use right = cell[2x + 1]. 
 
 class LTree:
