@@ -1,5 +1,5 @@
 # AVL Tree: is a self-balancing binary search tree where the difference between the left and right subtrees 
-# can't be more than one node for all nodes. check image: visualization\AVLTree\AVL tree.png
+# can't be more than one node for all nodes. check image: visualization\AVLTree\AVL tree.png and check visualization\AVLTree\time space complexity avl tree.png  
 # why: to make the time complexity O(logN) instead of O(n) in BST.
 
 # the four conditions for insertion and deletion:
@@ -160,7 +160,13 @@ class AVLTree:
             rootNode.right = self.rightRotation(rootNode.right)
             return self.leftRotation(rootNode)
         return rootNode
-            
+
+    # time complexity is O(1)
+    # space complexity is O(1)
+    def deleteAVL(self):
+        self.data = None
+        self.right = None
+        self.left = None
 
     def _minValue(self, root):
         current = root
@@ -198,8 +204,9 @@ newAVL = AVLTree(5)
 newAVL = newAVL.insertNode(newAVL, 10)
 newAVL = newAVL.insertNode(newAVL, 15)
 newAVL = newAVL.insertNode(newAVL, 20)
-newAVL = newAVL.deleteNode(newAVL, 15)
-newAVL = newAVL.deleteNode(newAVL, 5)
-newAVL = newAVL.deleteNode(newAVL, 10)
-newAVL = newAVL.insertNode(newAVL, 30)
-newAVL.levelOrderTraversal()
+newAVL.deleteAVL()
+# newAVL = newAVL.deleteNode(newAVL, 15)
+# newAVL = newAVL.deleteNode(newAVL, 5)
+# newAVL = newAVL.deleteNode(newAVL, 10)
+# newAVL = newAVL.insertNode(newAVL, 30)
+newAVL.levelOrderTraversal() 
