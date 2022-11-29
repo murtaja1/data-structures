@@ -1,4 +1,5 @@
 # Binary Heap:
+    # check visualization\BinaryHeap\time space of binary heap.png
     # . types of binary heap: check visualization\BinaryHeap\types of binary heap.png
         # 1. Min Heap: the value of each node is less than or equal to value of both its children.
         # 2. Max Heap: the opposite of Min heap the value of each node is greater than or equal to value of both its children.
@@ -14,7 +15,7 @@
     # 3. Priority Queue.
 
 class BinaryHeap:
-    # time complexity is O(N)
+    # time complexity is O(1 )
     # space complexity is O(N)
     def __init__(self, size) -> None:
         self.binaryHeap = (size+1) * [None]
@@ -112,6 +113,13 @@ class BinaryHeap:
                     self.binaryHeap[index] = self.binaryHeap[swapChildIndex]
                     self.binaryHeap[swapChildIndex] = temp
         self.heapifyExtraction(swapChildIndex, heapType)
+
+    # time complexity is O(1)
+    # space complexity is O(1)
+    def deleteBP(self): 
+        self.binaryHeap = None
+        self.heapSize = 0
+        self.maxSize = 0 
 
     # time complexity is O(logN)
     # space complexity is O(logN)
