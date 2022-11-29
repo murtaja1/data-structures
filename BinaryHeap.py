@@ -35,9 +35,10 @@ class BinaryHeap:
             return 
         return root.heapSize
 
+    # INSERTION.
     # time complexity is O(logN)
     # space complexity is O(logN)
-    def heapifyInsertion(self, valueIndex, heapType): 
+    def heapifyInsertion(self, valueIndex, heapType):  
         parentIndex = int(valueIndex/2)
         if valueIndex <= 1:
             return
@@ -64,7 +65,66 @@ class BinaryHeap:
         self.heapifyInsertion(self.heapSize, heapType)
         return 'Node was inserted successfully!'
 
+    # EXTRACTION.
+    # time complexity is O(logN)
+    # space complexity is O(logN)
+    def heapifyExtraction(self, index, heapType):
+        leftIndex = index * 2
+        rightIndex = index * 2 + 1
+        swapChildIndex = 0
+        if self.heapSize < leftIndex:
+            return
+        # if one child.
+        elif leftIndex == self.heapSize:
+            if heapType == 'Min':
+                if self.binaryHeap[index] > self.binaryHeap[leftIndex]:
+                    temp = self.binaryHeap[index]
+                    self.binaryHeap[index] = self.binaryHeap[leftIndex]
+                    self.binaryHeap[leftIndex] = temp
+                return
+            else: 
+                if self.binaryHeap[index] < self.binaryHeap[leftIndex]:
+                    temp = self.binaryHeap[index]
+                    self.binaryHeap[index] = self.binaryHeap[leftIndex]
+                    self.binaryHeap[leftIndex] = temp
+                return
+        # if has two children.
+        else:
+            if heapType == 'Min':
+                # Min then find the smallest child then swap with parent
+                if self.binaryHeap[leftIndex] < self.binaryHeap[rightIndex]:
+                    swapChildIndex = leftIndex
+                else:
+                    swapChildIndex = rightIndex
 
+                if self.binaryHeap[index] > self.binaryHeap[swapChildIndex]:
+                    temp = self.binaryHeap[index]
+                    self.binaryHeap[index] = self.binaryHeap[swapChildIndex]
+                    self.binaryHeap[swapChildIndex] = temp
+            else:
+                # Max then find the largest child then swap with parent
+                if self.binaryHeap[leftIndex] > self.binaryHeap[rightIndex]:
+                    swapChildIndex = leftIndex
+                else:
+                    swapChildIndex = rightIndex
+                if self.binaryHeap[index] < self.binaryHeap[swapChildIndex]:
+                    temp = self.binaryHeap[index]
+                    self.binaryHeap[index] = self.binaryHeap[swapChildIndex]
+                    self.binaryHeap[swapChildIndex] = temp
+        self.heapifyExtraction(swapChildIndex, heapType)
+
+    # time complexity is O(logN)
+    # space complexity is O(logN)
+    def extractNode(self, heapType):
+        if self.heapSize == 0:
+            return
+        extracted = self.binaryHeap[1]
+        self.binaryHeap[1] = self.binaryHeap[self.heapSize]
+        self.binaryHeap[self.heapSize] = None
+        self.heapSize -= 1
+        self.heapifyExtraction(1, heapType)
+        return extracted
+            
     # time complexity is O(N) for pre, in, post and level order traversal.
     # space complexity is O(N) for pre, in, post and level order traversal.
     # root => left => right
@@ -104,6 +164,7 @@ binaryHeap.insertNode(4, 'Min')
 binaryHeap.insertNode(5, 'Min')
 binaryHeap.insertNode(2, 'Min')
 binaryHeap.insertNode(1, 'Min')
+print('deleted', binaryHeap.extractNode('Min'))
 
 binaryHeap.leverOrderTraversal()
 
