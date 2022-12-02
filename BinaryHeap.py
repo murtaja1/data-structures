@@ -8,7 +8,7 @@
     
 #  Why use binary heap:
     # - to find minimum or maximum number among a set of numbers in logN time. 
-    #   And also we can m  ake sure that inserting additional numbers does not take more than logN time. 
+    #   And also we can make sure that inserting additional numbers does not take more than logN time. 
 # Practical Use:
     # 1. Prim's Algorithm.
     # 2. Heap Sort.
@@ -24,10 +24,10 @@ class BinaryHeap:
 
     # time complexity is O(1)
     # space complexity is O(1)
-    def peek(self, root):
-        if not root:
+    def peek(self):
+        if not self.binaryHeap:
             return 
-        return root.binaryHeap[1]
+        return self.binaryHeap[1]
 
     # time complexity is O(1)
     # space complexity is O(1)
@@ -41,6 +41,7 @@ class BinaryHeap:
     # space complexity is O(logN)
     def heapifyInsertion(self, valueIndex, heapType):  
         parentIndex = int(valueIndex/2)
+
         if valueIndex <= 1:
             return
         if heapType == 'Min':
@@ -172,7 +173,7 @@ binaryHeap.insertNode(4, 'Min')
 binaryHeap.insertNode(5, 'Min')
 binaryHeap.insertNode(2, 'Min')
 binaryHeap.insertNode(1, 'Min')
-print('deleted', binaryHeap.extractNode('Min'))
+# print('deleted', binaryHeap.extractNode('Min'))
 
 binaryHeap.leverOrderTraversal()
 
