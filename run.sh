@@ -1,7 +1,7 @@
 if [ $1 == am ]
   then 
     git add .
-    git commit -m 'Upgrade: add sliding window algorithm'
+    git commit -m 'Upgrade: update sliding window algorithm'
 fi
 # stands for push 
 if [ $2 == p ]
