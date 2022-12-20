@@ -2,7 +2,7 @@
     # Space Used: 
         # In Place: no need for extra space. ex: Bubble sort.
         # Out of Place: uses extra space. ex: Merge sort
-    # Stability: check visualization\stability.png/stability2.png.
+    # Stability: check sort/visualization\stability.png/stability2.png.
         # Stable: if a sorting algorithm after sorting the contents does not change the sequence of similar content in which they appear, then it's called stable sorting. ex: Insertion sort.
         # Unstable: if a sorting algorithm after sorting the contents changes the sequence of similar content in which they appear, then it's called unstable sorting. ex: Quick sort.
 

@@ -1,3 +1,5 @@
+import math
+
 class CSort:
     # Bubble Sort: aka Sinking sort.
     # We repeatedly compare each pair of adjacent element and swap them if they are in the wrong order.
@@ -52,9 +54,93 @@ class CSort:
             cList[j+1] = key
         return cList
 
+    # Bucket Sort: check visualization\sort\bucketSort.png.
+        # create buckets and distribute elements into buckets.
+        # sort buckets using a sorting algorithm.
+        # merge buckets after sorting.
+    # usage:
+    # when uniformly distributed over range. ex: 1, 2, 3, 4, 5. not correct 1, 43, 53, 2, 77.
+    # when space isn't a concern.
+    # time complexity is O(N logN)
+    # space complexity is O(N)
+    def bucketSort(self, cList):
+        # find number of buckets: buckets = round(square(number of elements))
+        buckets = round(math.sqrt(len(cList)))
+        # find max value
+        maxV = max(cList)
+        arr = []
+
+        for i in range(buckets):
+            arr.append([])
+        # distribute elements into
+        for i in cList:
+            # buckets: ceil(value*buckets/maxV)
+            bucket_index = math.ceil(i*buckets/maxV)
+            arr[bucket_index-1].append(i)
+        # sort the buckets
+        for i in range(buckets):
+            arr[i] = sorted(arr[i])
+        # merge buckets.
+        k = 0
+        for i in range(buckets):
+            for j in range(len(arr[i])):
+                cList[k] = arr[i][j]
+                k += 1
+        return cList
+    
+    # Merge Sort: it's divide and conquer algorithm. check visualization\sort\merge1.png/merge2.png      
+        # divide the input array into two halves and we keep halving recursively until they become too small to divided.
+        # merge the halves by sorting them.
+    # usage:
+        # when you need stable sort.
+        # better average time complexity.
+        # when space is not a concern.
+    # time complexity is O(N logN)
+    # space complexity is O(N)
+    def mergeSort(self, cList, l, r):
+        if l < r:
+            m = (l+(r-1))//2 # middle of the array.
+            self.mergeSort(cList, l, m) # left part of array.
+            self.mergeSort(cList, m+1, r) # right part of array.
+            self.merge(cList, l, m, r)
+        return cList
+    def merge(self, cList, l, m, r):
+        lPart = m-l+1 # length of the left part.
+        rPart = r-m # length of the right part.
+
+        lArr = [0] * (lPart) # left array.
+        rArr = [0] * (rPart) # right array.
+        # fill the left array.
+        for i in range(0, lPart):
+            lArr[i] = cList[l+i]
+        # fill the right array.
+        for j in range(0, rPart):
+            rArr[j] = cList[m+1+j]
+        
+        # sort and merge them.
+        left = 0
+        right = 0
+        k = l # index of the cList.
+        while left < lPart and right < rPart:
+            if lArr[left] <= rArr[right]:
+                cList[k] = lArr[left]
+                left += 1
+            else:
+                cList[k] = rArr[right]
+                right += 1
+            k += 1
+        # add the rest if any remaining. 
+        while left < lPart:
+            cList[k] = lArr[left]
+            left += 1
+            k += 1
+        while right < rPart:
+            cList[k] = rArr[right]
+            right += 1
+            k += 1
 
 cList = [2, 5, 1, 3, 4, 6, 8, 9, 7]
 cSort = CSort()
-print(cSort.insertionSort(cList))
+print(cSort.mergeSort(cList, 0, 8))
 
-# Note: if nested loop and each time the number of N reduced by one (not by half or third mostly half) then it's O(n*2).
+# Note: if nested loop and each time the number of N reduced by one (not by half or third, mostly half) then it's O(n*2).
