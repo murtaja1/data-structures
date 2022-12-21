@@ -139,8 +139,56 @@ class CSort:
             right += 1
             k += 1
 
+    # Quick Sort: it's a divide and conquer algorithm. check visualization\sort\quicksort.png
+    # find pivot number and make sure small numbers are located at the left side of pivot and bigger at the right of pivot.
+    # unlike merge sort, extra space is not needed.
+    # time complexity is O(N logN)
+    # space complexity is O(N)
+    def quickSort(self, cList, low, high):
+        if low < high:
+            pi = self.partition(cList, low, high) # the pi is sorted.
+            self.quickSort(cList, low, pi-1)
+            self.quickSort(cList, pi+1, high)
+        return cList
+        
+    def partition(self, cList, low, high):
+        i = low - 1
+        pivot = cList[high]
+        for j in range(low, high):
+            # if j is less than or equal to pivot, then swap the j with i  
+            if cList[j] <= pivot:
+                i += 1
+                cList[i], cList[j] = cList[j], cList[i]
+        cList[i+1], cList[high] = cList[high], cList[i+1]
+        return (i+1)
+    
+    # Heap Sort: uses heap tree.
+    # time complexity is O(N logN)
+    # space complexity is O(1)
+    def heapSort(self, cList):
+        n = len(cList)
+        for i in range(int(n/2)-1, -1, -1):
+            self.heapify(cList, n, i)
+        for i in range(n-1, 0, -1):
+            cList[i], cList[0] = cList[0], cList[i]
+            self.heapify(cList, i, 0)
+        return cList
+
+    def heapify(self, cList, n, i):
+        smallest = i
+        l = 2*i+1
+        r = 2*i+2
+        if l < n and cList[l] < cList[smallest]:
+            smallest = l
+        if r < n and cList[r] < cList[smallest]:
+            smallest = r
+        
+        if smallest != i:
+            cList[i], cList[smallest] = cList[smallest], cList[i]
+            self.heapify(cList, n, smallest)
+              
 cList = [2, 5, 1, 3, 4, 6, 8, 9, 7]
 cSort = CSort()
-print(cSort.mergeSort(cList, 0, 8))
+print(cSort.heapSort(cList))
 
 # Note: if nested loop and each time the number of N reduced by one (not by half or third, mostly half) then it's O(n*2).

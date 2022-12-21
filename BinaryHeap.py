@@ -55,7 +55,7 @@ class BinaryHeap:
                 temp = self.binaryHeap[valueIndex]
                 self.binaryHeap[valueIndex] = self.binaryHeap[parentIndex]
                 self.binaryHeap[parentIndex] = temp
-            self.heapifyInsertion(parentIndex, heapType)
+            self.heapifyInsertion(parentIndex, heapType) 
 
     # time complexity is O(logN)
     # space complexity is O(logN)
