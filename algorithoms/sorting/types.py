@@ -1,4 +1,4 @@
-# Type of Sorting:
+# Type of Sorting: check visualization\sort\timespacecomplexity.png
     # Space Used: 
         # In Place: no need for extra space. ex: Bubble sort.
         # Out of Place: uses extra space. ex: Merge sort
