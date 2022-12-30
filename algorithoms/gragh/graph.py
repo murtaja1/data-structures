@@ -11,4 +11,11 @@
     # - Acyclic Graph: has no loop. check visualization\graph\acyclicGraph.png
     # - Tree: it's a special case of directed acyclic graph. check visualization\graph\tree.png
 
+# Graph Types: check visualization\graph\GraphTypes.png
+    # 1. Unweighted-Undirected.
+    # 2. Unweighted-Directed.
+    # 3. Positive-Weighted-Undirected.
+    # 4. Positive-Weighted-Directed.
+    # 5. Negative-Weighted-Undirected.
+    # 6. Negative-Weighted-Directed.
 
