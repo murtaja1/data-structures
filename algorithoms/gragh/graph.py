@@ -19,3 +19,11 @@
     # 5. Negative-Weighted-Undirected.
     # 6. Negative-Weighted-Directed.
 
+# Graph Representation:
+    # Adjacency Matrix: it's a square matrix or a 2D array. And the element of the matrix indicate 
+                      # whether pairs or vertices are adjacent or not in the graph. check visualization\graph\adjacencyMatrix.png
+    # Adjacency List: it's a collection of unordered list  used to represent a graph. each list describes 
+                    # the set of neighbors of vertex in the graph. check visualization\graph\adjacencyList.png
+    # which to use: 
+    # if a graph is complete or almost complete we should use Adjacency Matrix.
+    # if the number of edges are few then we should use Adjacency List. 

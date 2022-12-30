@@ -1,7 +1,7 @@
 if [ "$1" == am ]
   then 
     git add .
-    git commit -m 'Upgrade: add graph types'
+    git commit -m 'Upgrade: add graph implementation'
   fi
 # stands for push 
 if [ "$2" == p ]
