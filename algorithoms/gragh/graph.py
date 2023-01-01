@@ -27,3 +27,9 @@
     # which to use: 
     # if a graph is complete or almost complete we should use Adjacency Matrix.
     # if the number of edges are few then we should use Adjacency List. 
+
+# when to use DFS or BFS Traversal:
+    # BFS is a good choice for traversing a graph when the goal is to visit all the vertices and edges in the graph, 
+    # and when it is important to find the shortest path between two vertices. 
+    # DFS is a good choice for traversing a graph when the goal is to explore as far as possible along each branch before backtracking, 
+    # and when space complexity is more important than time complexity.
