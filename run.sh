@@ -1,7 +1,7 @@
 if [ "$1" == am ]
   then 
     git add .
-    git commit -m 'Upgrade: add Topological Sort'
+    git commit -m 'Upgrade: add system design example'
   fi
 # stands for push 
 if [ "$2" == p ]
