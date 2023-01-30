@@ -26,7 +26,7 @@ class Graph:
     def topologicalSort(self):
         stack = []
         visited = []
-
+                               
         for v in list(self.graph):
             if v not in visited:
                 self.topologicalSortUtil(v, visited, stack)
